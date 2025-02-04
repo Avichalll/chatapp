@@ -39,7 +39,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         converter.setObjectMapper(new ObjectMapper());
         converter.setContentTypeResolver(resolver);
         messageConverters.add(converter);
-
         return false;
     }
 

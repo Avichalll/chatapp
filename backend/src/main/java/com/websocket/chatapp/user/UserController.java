@@ -21,7 +21,6 @@ public class UserController {
     @MessageMapping("/user.addUser")
     // @SendTo("/")
     @SendTo("/user/public")
-
     private User addUser(@Payload User user) {
 
         userService.addUser(user);

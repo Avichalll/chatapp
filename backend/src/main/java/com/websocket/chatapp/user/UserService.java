@@ -24,6 +24,7 @@ public class UserService {
             // Log the exception and rethrow or handle it accordingly
             System.err.println("Error saving user: " + e.getMessage());
             throw new RuntimeException("Failed to add user", e);
+
         }
 
     }

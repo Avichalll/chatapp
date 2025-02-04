@@ -34,7 +34,7 @@ function connect(event){
 
 function onConnected(){
 
-    stompClient.subscrib(`/user/${nickname}/queue/message`, onMessageReceived);
+    stompClient.subscribe(`/user/${nickname}/queue/message`, onMessageReceived);
     stompClient.subscribe(`/user/public`,onMessageReceived);
 
     stompClient.send(`app/user.addUser`,
