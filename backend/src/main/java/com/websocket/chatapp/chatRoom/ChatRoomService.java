@@ -19,9 +19,7 @@ public class ChatRoomService {
     public Optional<String> getChatRoomId(
             String senderId,
             String recipientId,
-            boolean createdNewRoomIfNotExists
-
-    ) {
+            boolean createdNewRoomIfNotExists) {
         return chatRoomRepository.findBySenderIdAndRecipientId(senderId,
                 recipientId).map(ChatRoom::getChatId).or(() -> {
                     if (createdNewRoomIfNotExists) {
@@ -46,6 +44,6 @@ public class ChatRoomService {
                 .build();
         chatRoomRepository.saveAll(Arrays.asList(senderRecipient, recipientSender));
         return chatId;
-
     }
+
 }
