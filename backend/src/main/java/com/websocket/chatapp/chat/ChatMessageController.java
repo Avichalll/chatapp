@@ -51,24 +51,29 @@ public class ChatMessageController {
     @GetMapping("/messasge/{senderId}/{recipientId}")
     public ResponseEntity<List<ChatMessage>> findChatMessage(
             @PathVariable("senderId") String senderId,
-            @PathVariable("recipientId") String recipientId
-
-    ) {
-
+            @PathVariable("recipientId") String recipientId) {
         return ResponseEntity.ok(chatMessageService.findChatMessage(senderId, recipientId));
     }
 
     @KafkaListener(topics = "chat-app", groupId = "myGroup")
     public void consumeMessage(ChatMessage chatMessage) {
-        ChatMessage savedMsg = chatMessageService.save(chatMessage);
+        // ChatMessage savedMsg = chatMessageService.save(chatMessage);
 
         messagingTemplate.convertAndSendToUser(chatMessage.getRecipientId(), "/queue/messages",
                 ChatNotification.builder()
-                        .id(savedMsg.getId())
-                        .senderId(savedMsg.getSenderId())
-                        .recipientId(savedMsg.getRecipientId())
-                        .content(savedMsg.getContent())
+                        // .id(savedMsg.getId())
+                        .senderId(chatMessage.getSenderId())
+                        .recipientId(chatMessage.getRecipientId())
+                        .content(chatMessage.getContent())
                         .build());
 
     }
+
+    @KafkaListener(topics = "chat-app", groupId = "batchGroup", containerFactory = "batchFactory")
+    public void batchProcessMessages(List<ChatMessage> messages) {
+        for (ChatMessage message : messages) {
+            chatMessageService.save(message);
+        }
+    }
+
 }
