@@ -13,6 +13,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ChatMessageService {
 
+    
+
     @Autowired
     private final ChatMessageRepository chatMessageRepository;
     private final ChatRoomService chatRoomService;
@@ -30,6 +32,8 @@ public class ChatMessageService {
     // i'm just cheking review
     // i'm just cheking review
     // i'm just cheking review
+    // i'm just cheking review
+
 
 
 
