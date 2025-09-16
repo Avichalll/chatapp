@@ -27,4 +27,10 @@ public class ChatRoom {
     private String senderId;
     private String recipientId;
 
+    // hello my name is feature2
+    // hello my name is feature2
+    // hello my name is feature2
+
+
+
 }
